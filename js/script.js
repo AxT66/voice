@@ -38,13 +38,18 @@ function speakText(text, voice) {
 function populateVoiceList() {
     const voices = window.speechSynthesis.getVoices();
 
-    voices.forEach(voice => {
+    // Clear the existing options
+    voiceSelect.innerHTML = '';
+
+    // Select the first four voices
+    for (let i = 0; i < 4 && i < voices.length; i++) {
         const option = document.createElement('option');
-        option.textContent = voice.name;
-        option.value = voice.name;
+        option.textContent = voices[i].name;
+        option.value = voices[i].name;
         voiceSelect.appendChild(option);
-    });
+    }
 }
+
 
 populateVoiceList();
 
