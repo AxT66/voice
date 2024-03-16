@@ -22,16 +22,25 @@ stopButton.addEventListener('click', () => {
 });
 
 function speakText(text, voice) {
-    utterance = new SpeechSynthesisUtterance(text);
-    // Selecting a voice
-    const voices = window.speechSynthesis.getVoices();
-    utterance.voice = voices.find(v => v.name === voice);
-    
-    utterance.onend = () => { // Set an event listener for when the speech ends
-        utterance = null; // Reset the utterance variable
-    };
+    const chunkLength = 200; // Adjust the chunk length as needed
+    const chunks = text.match(new RegExp('.{1,' + chunkLength + '}', 'g'));
+    let index = 0;
 
-    speechSynthesis.speak(utterance);
+    function speakNextChunk() {
+        if (index < chunks.length) {
+            const chunk = chunks[index];
+            utterance = new SpeechSynthesisUtterance(chunk);
+            const voices = window.speechSynthesis.getVoices();
+            utterance.voice = voices.find(v => v.name === voice);
+            utterance.onend = () => {
+                index++;
+                speakNextChunk(); // Continue to the next chunk when the current one ends
+            };
+            speechSynthesis.speak(utterance);
+        }
+    }
+
+    speakNextChunk(); // Start speaking the first chunk
 }
 
 // Populate the voice selection dropdown
@@ -49,9 +58,6 @@ function populateVoiceList() {
         voiceSelect.appendChild(option);
     }
 }
-
-
-populateVoiceList();
 
 // Update the voice list when voices are loaded (Chrome only)
 window.speechSynthesis.onvoiceschanged = populateVoiceList;
