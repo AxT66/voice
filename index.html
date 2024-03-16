@@ -30,6 +30,7 @@
         }
     </style>
 </head>
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="#">Text-to-Speech</a>
@@ -52,36 +53,33 @@
         </div>
     </div>
 </nav>
-<body>
-   
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <textarea id="input-text" class="form-control mb-3" style="width:100%;" placeholder="Enter text here..."></textarea>
-                <select id="voice-select" class="form-control mb-3"></select> <!-- Dropdown for voice selection -->
-                <button id="speak-button" class="btn btn-primary btn-block">Speak</button>
-                <button id="stop-button" class="btn btn-danger btn-block">Stop</button> <!-- Added stop button -->
-            </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <textarea id="input-text" class="form-control mb-3" style="width:100%;" placeholder="Enter text here..."></textarea>
+            <select id="voice-select" class="form-control mb-3"></select> <!-- Dropdown for voice selection -->
+            <button id="speak-button" class="btn btn-primary btn-block">Speak</button>
+            <button id="stop-button" class="btn btn-danger btn-block">Stop</button> <!-- Added stop button -->
         </div>
     </div>
+</div>
 
-    <footer class="footer mt-auto py-3 bg-dark text-white">
-        <div class="container text-center">
-            <span>&copy; 2024 Text-to-Speech Website</span>
-        </div>
-    </footer>
+<footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container text-center">
+        <span>&copy; 2024 Text-to-Speech Website</span>
+    </div>
+</footer>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="js/script.js">
-     
-    </script>
-
-    <script>
-        // Automatically adjust textarea height when text is pasted
-        document.getElementById('input-text').addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-    </script>
+<script>
+    // Automatically adjust textarea height when text is pasted
+    document.getElementById('input-text').addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+</script>
 </body>
 </html>
