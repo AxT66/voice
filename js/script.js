@@ -26,17 +26,10 @@ function speakText(text, voice) {
     // Selecting a voice
     const voices = window.speechSynthesis.getVoices();
     utterance.voice = voices.find(v => v.name === voice);
-    
-    utterance.onstart = () => { // Set an event listener for when the speech starts
-        // Start highlighting words
-        let currentIndex = 0;
-        let intervalId = setInterval(() => {
-            highlightWord(currentIndex);
-            currentIndex++;
-            if (currentIndex >= text.length) {
-                clearInterval(intervalId);
-            }
-        }, 500);
+
+    utterance.onboundary = (event) => { // Set an event listener for word boundary
+        const currentIndex = event.charIndex;
+        highlightWord(currentIndex);
     };
 
     utterance.onend = () => { // Set an event listener for when the speech ends
@@ -46,6 +39,7 @@ function speakText(text, voice) {
 
     speechSynthesis.speak(utterance);
 }
+
 
 // Highlight the word at the given index
 // Highlight the word at the given index
